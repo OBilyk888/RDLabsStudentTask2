@@ -9,7 +9,7 @@ And I login to application with username 'admin' and password 'admin123'
 And I go to My Goals page
 
 Scenario: AC-1 Check that No Records Found message is shown after going to Unapproved section in My Goals page
-Meta: @regression
+Meta: @regression @debug
 When I click on Unapproved Goals button
 Then No Records Found message is shown on the page
 

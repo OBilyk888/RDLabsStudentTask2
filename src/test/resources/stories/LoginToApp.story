@@ -17,9 +17,9 @@ When I login to application with username '' and password 'admin123'
 Then error message appears with text: Username cannot be empty
 
 Scenario: AC-3 Login to the application with empty password
-Meta: @regression
+Meta: @regression @debug
 When I login to application with username 'admin' and password ''
-Then error message appears with text: Username cannot be empty
+Then error message appears with text: Password cannot be empty
 
 Scenario: AC-4 Check that all roles available on login page
 Meta: @regression
@@ -32,7 +32,7 @@ Then following roles are shown in the drop down:
 | 1st Level Supervisor |
 
 Scenario: AC-5 Check that following social-media buttons -  facebook, google, twitter, youtube, linkedin are visible on login page:
-Meta: @regression
+Meta: @regression @debug
 Then I check that following social-media buttons are visible:
 | social_media_button |
 | facebook            |
