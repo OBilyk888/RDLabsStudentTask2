@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//ul[@class='dropdown-menu']//li//a")
     private List<WebElementFacade> userRoles;
 
-    @FindBy(css = ".outer .hidden-md")
+    @FindBy(xpath = "//div[contains(@class,'social-button')]")
     private WebElementFacade socialMediaContainer;
 
     public void enterUserName(String userName) {

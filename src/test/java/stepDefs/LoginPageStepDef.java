@@ -58,8 +58,8 @@ public class LoginPageStepDef extends DefaultStepsData {
         WebElementFacade socialMediaContainer = loginPage.getSocialMediaContainer();
         for (Map<String, String> row : rows) {
             String socialMediaButtonName = row.get("social_media_button");
-            boolean isButtonVisible = socialMediaContainer.then(By.xpath(".//a[contains(@class,'" + socialMediaButtonName + "')]")).isVisible();
-            softly.assertThat(isButtonVisible).as(String.format("button %s not visible", socialMediaButtonName)).isTrue();
+            boolean isButtonVisible = socialMediaContainer.then(By.xpath("//a[contains(@class,'" + socialMediaButtonName + "')]")).isVisible();
+            softly.assertThat(isButtonVisible).as(String.format("button %s visible", socialMediaButtonName)).isTrue();
         }
     }
 }

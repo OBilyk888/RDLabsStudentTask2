@@ -19,9 +19,8 @@ public class MyGoalsStepDefs extends DefaultStepsData {
     @Then("$message message is shown on the page")
     public void checkErrorMessageText(String message) {
         softly.assertThat(myGoalsSteps.getUnapprovedGoalsInfoMessageText())
-                .as("Wrong text is shown").contains(message);
+                .as("Wrong text is shown").isEqualTo(message);
     }
-
     @When("I hover mouse over Add button")
     public void hoverMouseOverButton() {
         myGoalsSteps.hoverMouseOverAddButton();
