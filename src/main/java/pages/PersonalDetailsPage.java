@@ -24,6 +24,9 @@ public class PersonalDetailsPage extends BasePage {
     @FindBy(xpath = "//label[@for='emp_gender_1']")
     private WebElementFacade maleRadioButton;
 
+    @FindBy(xpath = "//label[@for='emp_gender_2']")
+    private WebElementFacade femaleRadioButton;
+
     public void enterDateOfBirth(String date) {
         log.info(String.format("Putting %s date into [Date of birth] field", date));
         dateOfBirthInputField.clear();

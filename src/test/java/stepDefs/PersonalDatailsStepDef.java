@@ -42,4 +42,24 @@ public class PersonalDatailsStepDef extends DefaultStepsData {
         boolean isSorted = Ordering.natural().isOrdered(optionsFromNationalitySelect);
         softly.assertThat(isSorted).as("Wrong ordering inside select box").isTrue();
     }
+
+    @When("I under Gender label I set Male radio button as checked")
+    public void setMaleRadioButton() {
+        personalDetailsPage.getMaleRadioButton().waitUntilClickable().click();
+    }
+
+    @Then("I check that Female radio button is unchecked")
+    public void checkThatFemaleIsUnchecked() {
+        softly.assertThat(personalDetailsSteps.getFemaleButtonBooleanAttribute()).isEqualTo(false);
+    }
+
+    @When("I set Female radio button as checked")
+    public void setFemaleRadioButton() {
+        personalDetailsPage.getFemaleRadioButton().waitUntilClickable().click();
+    }
+
+    @Then("I check that Male radio button is unchecked")
+    public void checkThatMaleIsUnchecked() {
+        softly.assertThat(personalDetailsSteps.getMaleButtonBooleanAttribute()).isEqualTo(false);
+    }
 }

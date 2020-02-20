@@ -46,8 +46,6 @@ Meta: @regression
 Then Check that text 'admin' admin is shown in Username field
 
 Scenario: AC-7 Check that pop up messege with text 'Invalid Credentials' is shown after login with invalid credentials
-Meta: @regression @testCases
+Meta: @regression
 When I login to application with username 'admin_invalid' and password 'admin_invalid'
 Then I check that pop up with text Invalid Credentials appears
-
-
