@@ -35,6 +35,9 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[@id='toast-container']//div[@class='toast-message']")
     private WebElementFacade invalidCredentialsPopUp;
 
+    @FindBy(css = "#toast-container")
+    private WebElementFacade popUpContainer;
+
     public void enterUserName(String userName) {
         log.info("Login to app with userName " + userName);
         loginInputField.waitUntilVisible().waitUntilClickable().clear();

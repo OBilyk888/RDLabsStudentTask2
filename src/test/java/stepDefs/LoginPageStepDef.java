@@ -39,19 +39,10 @@ public class LoginPageStepDef extends DefaultStepsData {
                 .contains(errorTextMessage);
     }
 
-
-//    @Then("pop up message appears with text: $InvalidCredentials")
-//    public void checkPopUpWithTextAppearsAfterUnsuccesfulLogin(String errorTextMessage) {
-//        softly.assertThat(loginPageSteps.getinvalidCredentialsPopUp()).as("Invalid Credentials text is shown")
-//                .contains(errorTextMessage);
-
-        // loginPage.getInvalidCredentialsPopUp();
-        //loginPage.withTimeoutOf(Duration.ofSeconds(3).wait(loginPage.getInvalidCredentialsPopUp()));
-
-//        Alert alert = getDriver().switchTo().alert();
-//        String alertMessage = getDriver().switchTo().alert().getText();
-//        System.out.println(alertMessage);
-
+    @Then("I check that pop up with text $Invalid_Credentials appears")
+    public void checkThatPopUPInvalidCredentialsAppears(String textPopUp) {
+        softly.assertThat(loginPageSteps.getTextFromPopUPInvalidCredentials()).isEqualTo(textPopUp);
+    }
 
     @When("I click on Login as a Different Role button")
     public void clickOnShowRoleButton() {
