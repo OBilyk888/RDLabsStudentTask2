@@ -6,10 +6,13 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import steps.DefaultStepsData;
 import steps.LoginPageSteps;
 
+import java.awt.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +39,20 @@ public class LoginPageStepDef extends DefaultStepsData {
                 .contains(errorTextMessage);
     }
 
+
+//    @Then("pop up message appears with text: $InvalidCredentials")
+//    public void checkPopUpWithTextAppearsAfterUnsuccesfulLogin(String errorTextMessage) {
+//        softly.assertThat(loginPageSteps.getinvalidCredentialsPopUp()).as("Invalid Credentials text is shown")
+//                .contains(errorTextMessage);
+
+        // loginPage.getInvalidCredentialsPopUp();
+        //loginPage.withTimeoutOf(Duration.ofSeconds(3).wait(loginPage.getInvalidCredentialsPopUp()));
+
+//        Alert alert = getDriver().switchTo().alert();
+//        String alertMessage = getDriver().switchTo().alert().getText();
+//        System.out.println(alertMessage);
+
+
     @When("I click on Login as a Different Role button")
     public void clickOnShowRoleButton() {
         loginPageSteps.clickOnTheLoginAsDifferentRoleButton();
@@ -61,5 +78,10 @@ public class LoginPageStepDef extends DefaultStepsData {
             boolean isButtonVisible = socialMediaContainer.then(By.xpath("//a[contains(@class,'" + socialMediaButtonName + "')]")).isVisible();
             softly.assertThat(isButtonVisible).as(String.format("button %s visible", socialMediaButtonName)).isTrue();
         }
+    }
+
+    @Then("Check that text '$admin' admin is shown in Username field")
+    public void checkThatTextAdminIsDefault(String admin) {
+        softly.assertThat(loginPageSteps.getTexFromAdminField()).isEqualTo(admin);
     }
 }

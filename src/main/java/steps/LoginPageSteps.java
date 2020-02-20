@@ -3,6 +3,7 @@ package steps;
 import lombok.extern.slf4j.Slf4j;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.Alert;
 
 import java.time.Duration;
 import java.util.List;
@@ -24,6 +25,32 @@ public class LoginPageSteps extends DefaultStepsData {
         return loginPage.getEmptyFieldErrorMessage().waitUntilVisible().getText();
     }
 
+//    @Step
+//    public String getinvalidCredentialsPopUp() {
+//        log.info("Getting the pop up after unsuccessful login to application with the text");
+//        return loginPage.getInvalidCredentialsPopUp().waitUntilVisible().getText();
+
+//        try {
+//            //WebDriverWait wait = new WebDriverWait(driver, 2);
+//            wait.until(ExpectedConditions.alertIsPresent());
+//            Alert alert = getDriver().switchTo().alert();
+//            alert.accept();
+//
+//        } catch (Exception e) {
+//            //exception handling
+//        }
+
+//        try {
+//            getDriver().switchTo().alert();
+//            return loginPage.getInvalidCredentialsPopUp().waitUntilVisible().getText();
+//        } // try
+//        finally {
+//            softlyAssertAll();
+//        }
+
+//        Alert alert = getDriver().switchTo().alert();
+//        alert.accept();
+
     @Step
     public void clickOnTheLoginAsDifferentRoleButton() {
         loginPage.clickOnTheLoginAsDifferentRoleButton();
@@ -33,5 +60,10 @@ public class LoginPageSteps extends DefaultStepsData {
     @Step
     public List<String> getAllUsersRolesFromDropDown() {
         return loginPage.getUserRoles().stream().map(WebElementFacade::getText).collect(Collectors.toList());
+    }
+
+    @Step
+    public String getTexFromAdminField() {
+        return loginPage.getLoginInputField().waitUntilEnabled().getValue();
     }
 }

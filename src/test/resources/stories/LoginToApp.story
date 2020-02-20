@@ -32,7 +32,7 @@ Then following roles are shown in the drop down:
 | 1st Level Supervisor |
 
 Scenario: AC-5 Check that following social-media buttons -  facebook, google, twitter, youtube, linkedin are visible on login page:
-Meta: @regression @debug
+Meta: @regression
 Then I check that following social-media buttons are visible:
 | social_media_button |
 | facebook            |
@@ -41,12 +41,13 @@ Then I check that following social-media buttons are visible:
 | youtube             |
 | linkedin            |
 
-!-- TODO implement this scenario
 Scenario: AC-6 Check that text "admin" is shown by default on login page in user name field
+Meta: @regression @testCases
+Then Check that text 'admin' admin is shown in Username field
 
-!-- TODO implement this scenario
 Scenario: AC-7 Check that pop up messege with text 'Invalid Credentials' is shown after login with invalid credentials
-
-
+Meta: @regression
+//When I login to application with username 'admin_invalid' and password 'admin_invalid'
+//Then pop up message appears with text: Invalid Credentials
 
 
