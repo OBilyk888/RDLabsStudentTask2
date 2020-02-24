@@ -65,5 +65,16 @@ public class DashboardPageStepDef extends DefaultStepsData {
         softly.assertThat(dashboardPageSteps.getCountOfNews()).isEqualTo(dashboardPageSteps.getRealCount());
     }
 
+    @Then("I check that $Documents section is present on Dashboard page with header Documents")
+    public void checkThatDocumentsSectionIsPresent(String value){
+        softly.assertThat((dashboardPageSteps.getTextFromTheHeaderDocuments())).isEqualTo(value);
+    }
+
+    @Then("I check that news counter (Showing: number / number) under Documents section is same as real amount of news in list")
+    public void checkThatDocumentsCounterEqualsToRealAmount(){
+        System.out.println("CounterOfDocuments = " + dashboardPageSteps.getCountOfNews());
+        System.out.println("RealCount = " + dashboardPageSteps.getRealCount());
+        softly.assertThat(dashboardPageSteps.getCountOfNews()).isEqualTo(dashboardPageSteps.getRealCount());
+    }
 
 }

@@ -46,8 +46,14 @@ public class DashboardPage extends BasePage {
     @FindBy(xpath = "//div[@id = 'panel_draggable_2_9']//div[@class = 'dashboardCard-title-for-card']")
     private WebElementFacade newsHeader;
 
+    @FindBy(xpath = "//div[@id='panel_draggable_2_8']//div[@class='dashboardCard-title-for-card']")
+    private  WebElementFacade documentsHeader;
+
     @FindBy(xpath = "//div[contains(@id,'dashboard__viewNewsOnDashboard')]//div[@class = 'inner']//ul//li")
     private List<WebElementFacade> listOfNews;
+
+    @FindBy(xpath = "//div[contains(@id,'DocumentsOnDashboard')]//ul//li")
+    private List<WebElementFacade> listOfDocuments;
 
     @FindBy(css = "#dashboard__viewNewsOnDashboard > div.document-count-text > div.right")
     private WebElementFacade realCountOfNews;

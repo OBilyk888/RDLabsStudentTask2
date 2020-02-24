@@ -22,12 +22,12 @@ When I click on the three dots button inside Leave Taken from January by Subunit
 Then Legend component appears in Leave Taken from January by Subunit section
 
 Scenario: AC-3 Check that news counter and actual amount of news are same
-Meta:@debug
+Meta: @regression
 Then I check that News section is present on Dashboard page with header News
 Then I check that news counter (Showing: number / number) under "News" section is same as real amount of news in list
 
-
-!-- TODO implement this scenario
 Scenario: AC-4 Check that documents counter and actual amount of documents are same
-
+Meta: @testCases
+Then I check that Documents section is present on Dashboard page with header Documents
+Then I check that news counter (Showing: number / number) under Documents section is same as real amount of news in list
 

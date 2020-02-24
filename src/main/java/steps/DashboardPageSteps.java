@@ -53,11 +53,12 @@ public class DashboardPageSteps extends DefaultStepsData {
     }
 
     @Step
-    public String getTextFromTheHeaderNews(){
+    public String getTextFromTheHeaderNews() {
         return dashboardPage.getNewsHeader().waitUntilVisible().getText();
     }
+
     @Step
-    public int getCountOfNews(){
+    public int getCountOfNews() {
         int temp = 0;
         List<WebElementFacade> listOfNews = dashboardPage.getListOfNews();
         for (int i = 0; i < listOfNews.size(); i++) {
@@ -68,8 +69,25 @@ public class DashboardPageSteps extends DefaultStepsData {
     }
 
     @Step
-    public int getRealCount(){
+    public int getCountOfDocuments() {
+        int temp = 0;
+        List<WebElementFacade> listOfDocuments = dashboardPage.getListOfDocuments();
+        for (int i = 0; i < listOfDocuments.size(); i++) {
+            WebElementFacade webElementFacade = listOfDocuments.get(i);   // element = 0;  dashboardPage.getListOfNews = 16;  element = 0   temo = 56;
+            temp++;
+        }
+        return temp;
+    }
+
+    @Step
+    public int getRealCount() {
         String value = dashboardPage.getStringFromSectionNews().split("/")[1].trim();
         return Integer.parseInt(value);
     }
+
+    @Step
+    public String getTextFromTheHeaderDocuments() {
+        return dashboardPage.getDocumentsHeader().waitUntilVisible().getText();
+    }
+
 }
