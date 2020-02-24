@@ -27,14 +27,36 @@ public class PersonalDetailsPage extends BasePage {
     @FindBy(xpath = "//label[@for='emp_gender_2']")
     private WebElementFacade femaleRadioButton;
 
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElementFacade buttonSave;
+
+    @FindBy(xpath = "//span[@class='help-block-message']")
+    private WebElementFacade errorMessage;
+
+    @FindBy(xpath = "//*[@id=\"eeo_race_ent_inputfileddiv\"]/div/input")
+    private WebElementFacade EEORaceAndEthnicity;
+
+    @FindBy(xpath = "//*[@id=\"eeo_race_ent_inputfileddiv\"]/span")
+    private WebElementFacade EEORaceAndEthnicityMessage;
+
     public void enterDateOfBirth(String date) {
         log.info(String.format("Putting %s date into [Date of birth] field", date));
         dateOfBirthInputField.clear();
         dateOfBirthInputField.waitUntilEnabled().sendKeys(date);
     }
 
+    public void setDateOfBirthInputField(WebElementFacade dateOfBirthInputField) {
+        this.dateOfBirthInputField = dateOfBirthInputField;
+        dateOfBirthInputField.clear();
+        dateOfBirthInputField.waitUntilEnabled().sendKeys();
+    }
+
     public void clickOnMaleRadioButton() {
         log.info("set Male radio button checked");
         maleRadioButton.waitUntilVisible().waitUntilClickable().click();
     }
+
+
+
+
 }

@@ -1,5 +1,7 @@
 package steps;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 
@@ -19,6 +21,18 @@ public class PersonalDetailsSteps extends DefaultStepsData {
         personalDetailsPage.enterDateOfBirth(date);
     }
 
+
+    @Step
+    public String getDefaultEEORaceAndEthnicityStatus() {
+        return personalDetailsPage.getEEORaceAndEthnicity().getValue();
+    }
+
+    @Step
+    public String getMessageFromEEORaceAndEthnicity() {
+        return personalDetailsPage.getEEORaceAndEthnicityMessage().getText();
+    }
+
+
     @Step
     public List<String> getOptionsFromNationalitySelect() {
         List<String> nationalityOptions = personalDetailsPage.getNationalitySelect().thenFindAll(By.xpath("./..//li//span"))
@@ -36,5 +50,4 @@ public class PersonalDetailsSteps extends DefaultStepsData {
     public boolean getMaleButtonBooleanAttribute() {
         return Boolean.parseBoolean(personalDetailsPage.getMaleRadioButton().find(By.xpath("./../input")).waitUntilEnabled().getAttribute("checked"));
     }
-
 }

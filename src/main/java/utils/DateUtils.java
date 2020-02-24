@@ -26,4 +26,5 @@ public class DateUtils {
             return getCurrentDateInFormat(datePattern);
         }
     }
+
 }

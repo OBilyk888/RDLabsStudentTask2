@@ -21,8 +21,11 @@ Then Legend component appears in Employee Distribution by Subunit section
 When I click on the three dots button inside Leave Taken from January by Subunit section
 Then Legend component appears in Leave Taken from January by Subunit section
 
-!-- TODO implement this scenario
 Scenario: AC-3 Check that news counter and actual amount of news are same
+Meta:@debug
+Then I check that News section is present on Dashboard page with header News
+Then I check that news counter (Showing: number / number) under "News" section is same as real amount of news in list
+
 
 !-- TODO implement this scenario
 Scenario: AC-4 Check that documents counter and actual amount of documents are same

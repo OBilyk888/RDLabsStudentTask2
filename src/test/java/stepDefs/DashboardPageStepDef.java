@@ -8,6 +8,8 @@ import steps.CommonSteps;
 import steps.DashboardPageSteps;
 import steps.DefaultStepsData;
 
+import javax.print.DocFlavor;
+
 public class DashboardPageStepDef extends DefaultStepsData {
 
     @Steps
@@ -51,5 +53,17 @@ public class DashboardPageStepDef extends DefaultStepsData {
     public void checkThatLegendAppears(String sectionName) {
         softly.assertThat(dashboardPageSteps.checkThatLegendAppearsIn(sectionName)).as("Legend component not appears").isTrue();
     }
+
+    @Then("I check that $News section is present on Dashboard page with header News")
+    public void checkThatNewsSectionIsPresent(String value){
+        softly.assertThat(dashboardPageSteps.getTextFromTheHeaderNews()).isEqualTo(value);
+    }
+    @Then("I check that news counter (Showing: number / number) under \"News\" section is same as real amount of news in list")
+    public void checkThatCounterEqualsToRealAmount(){
+        System.out.println("CountOfNews = " + dashboardPageSteps.getCountOfNews());
+        System.out.println("RealCount = " + dashboardPageSteps.getRealCount());
+        softly.assertThat(dashboardPageSteps.getCountOfNews()).isEqualTo(dashboardPageSteps.getRealCount());
+    }
+
 
 }

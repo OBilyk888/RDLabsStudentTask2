@@ -1,6 +1,7 @@
 package stepDefs;
 
 import com.google.common.collect.Ordering;
+import emuns.ItemsSelect;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -36,6 +37,11 @@ public class PersonalDatailsStepDef extends DefaultStepsData {
         softly.assertThat(currentDate).as("After refreshing Date of Birth change").isEqualTo(DATE_OF_BIRTH.get());
     }
 
+    @When("I click on save button in Personal Details form")
+    public void clickOnTheSaveButton() {
+        personalDetailsPage.getButtonSave().submit();
+    }
+
     @Then("I check that all countries in Nationality select box ordered by name asc")
     public void checkOrderingInNationalitySelectBox() {
         List<String> optionsFromNationalitySelect = personalDetailsSteps.getOptionsFromNationalitySelect();
@@ -62,4 +68,44 @@ public class PersonalDatailsStepDef extends DefaultStepsData {
     public void checkThatMaleIsUnchecked() {
         softly.assertThat(personalDetailsSteps.getMaleButtonBooleanAttribute()).isEqualTo(false);
     }
+
+//    @Then("When I Set Date of Birth as tomorrow data")
+//    public void setDateOfBirthAsTomorrowDate(){
+//        personalDetailsPage.getDateOfBirthInputField().waitUntilClickable().click();
+//    }
+
+    @When("I set Data of Birth as tomorrow data")
+    public void setDataOfBirthAsTommorowDate() {
+        String currentDate = personalDetailsSteps.getValueFromDateOfBirthField();
+
+        String updatedDate = getDateInFutureOrPastFromNow(DATEPATTERN_MY, 1);
+        personalDetailsSteps.enterDateIntoDateBirthField(updatedDate);
+    }
+
+    @When("I click on button Save in Personal Details form")
+    @Then("I click on button Save in Personal Details form")
+    public void clickOnTheButtonSave(){
+        personalDetailsPage.getButtonSave().submit();
+    }
+
+    @Then("I check that error message with text $Should_be_on_or_before_today appears under Date of Birth field")
+    public void checkThatErrorMessageContains(String message) {
+        softly.assertThat(personalDetailsPage.getErrorMessage().getText()).isEqualTo(message);
+    }
+
+    @Then("I check that EEO Race and Ethnicity select has NO value by default")
+    public void checkThatEEORaceAndEthnicityIsDefault() {
+        softly.assertThat(personalDetailsSteps.getDefaultEEORaceAndEthnicityStatus()).isEqualTo(ItemsSelect.DEFAULT_VALUE.value);
+    }
+
+    @When("I click on Save button in Personal Details form")
+    public void clickOnTheSaveButtonAC_6() {
+        personalDetailsPage.getButtonSave().submit();
+    }
+
+    @Then("I check that error message with text $Required appears under EEO Race and Ethnicity field")
+    public void checkThatRequiredAppearsUuderEEORace(String text) {
+        softly.assertThat(personalDetailsSteps.getMessageFromEEORaceAndEthnicity()).isEqualTo((text));
+    }
+
 }

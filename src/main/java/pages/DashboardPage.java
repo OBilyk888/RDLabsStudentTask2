@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 
+import java.util.List;
+
 @Getter
 @Slf4j
 public class DashboardPage extends BasePage {
@@ -41,6 +43,15 @@ public class DashboardPage extends BasePage {
     @FindBy(css = "#legend")
     private WebElementFacade leavesLegend;
 
+    @FindBy(xpath = "//div[@id = 'panel_draggable_2_9']//div[@class = 'dashboardCard-title-for-card']")
+    private WebElementFacade newsHeader;
+
+    @FindBy(xpath = "//div[contains(@id,'dashboard__viewNewsOnDashboard')]//div[@class = 'inner']//ul//li")
+    private List<WebElementFacade> listOfNews;
+
+    @FindBy(css = "#dashboard__viewNewsOnDashboard > div.document-count-text > div.right")
+    private WebElementFacade realCountOfNews;
+
     public void clickOnHideMenuButton() {
         log.info("Clicking on the [Hide menu] button");
         hideMenuButton.waitUntilVisible().waitUntilClickable().click();
@@ -49,6 +60,10 @@ public class DashboardPage extends BasePage {
     public void clickOnShowMenuButton() {
         log.info("Clicking on the [Show menu] button");
         showMenuButton.waitUntilVisible().waitUntilClickable().click();
+    }
+
+    public String getStringFromSectionNews(){
+        return realCountOfNews.getText();
     }
 
 }

@@ -2,7 +2,10 @@ package steps;
 
 import emuns.ItemsContainer;
 import lombok.extern.slf4j.Slf4j;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
+
+import java.util.List;
 
 @Slf4j
 public class DashboardPageSteps extends DefaultStepsData {
@@ -47,5 +50,26 @@ public class DashboardPageSteps extends DefaultStepsData {
             default:
                 throw new IllegalStateException("Unexpected value: " + itemsContainer);
         }
+    }
+
+    @Step
+    public String getTextFromTheHeaderNews(){
+        return dashboardPage.getNewsHeader().waitUntilVisible().getText();
+    }
+    @Step
+    public int getCountOfNews(){
+        int temp = 0;
+        List<WebElementFacade> listOfNews = dashboardPage.getListOfNews();
+        for (int i = 0; i < listOfNews.size(); i++) {
+            WebElementFacade webElementFacade = listOfNews.get(i);   // element = 0;  dashboardPage.getListOfNews = 16;  element = 0   temo = 56;
+            temp++;
+        }
+        return temp;
+    }
+
+    @Step
+    public int getRealCount(){
+        String value = dashboardPage.getStringFromSectionNews().split("/")[1].trim();
+        return Integer.parseInt(value);
     }
 }
