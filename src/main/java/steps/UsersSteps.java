@@ -46,8 +46,47 @@ public class UsersSteps extends DefaultStepsData {
     }
 
     @Step
+    public void filterUsersByStatusName() {
+        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
+        filterUsersModalWindow.getStatus().waitUntilEnabled().click();
+    }
+
+    @Step
+    public void switchFilter(String filter) {
+        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
+
+        switch (filter) {
+            case "Disabled":
+                filterUsersModalWindow.getStatus().findBy(By.xpath(".//..//ul//span[text()='Disabled']")).waitUntilEnabled().waitUntilClickable().click();
+                break;
+
+            case "Admin Role":
+                filterUsersModalWindow.getAdminRole().find(By.xpath("./..//ul//span[text()='Global Admin']")).waitUntilEnabled().waitUntilClickable().click();
+                break;
+        }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Step
     public List<UsersGrid> getUsersGrid() {
         log.info("Getting [Users] grid");
         return new UsersGrid().getAllItems(usersPage.getDriver());
     }
+
+    @Step
+    public boolean employeeIsShown(String employeeName) {
+        List<UsersGrid> allItems = getUsersGrid();
+        for (UsersGrid singeleObject : allItems) {
+            if (singeleObject.getEmployeeName().equals(employeeName)) {
+                log.info("MyUserObject = " + singeleObject);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -21,6 +21,17 @@ public class UsersPageStepDef extends DefaultStepsData {
         usersSteps.filterUsersByEmployeeName(employeeName);
     }
 
+ /*   @When("Filter user by Status Name")
+    public void filterUsersByStatus() {
+        usersSteps.filterUsersByStatusName();
+    }*/
+
+    @When("Filter user by Status Name Select with option Disabled")
+    public void selectDisabledStatus() {
+        usersSteps.filterUsersByStatusName();
+        usersSteps.switchFilter("Disabled");
+    }
+
     @Then("record is shown with following parameters:$table")
     public void checkResultOfFiltering(ExamplesTable examplesTable) {
         Map<String, String> row = examplesTable.getRow(0);
@@ -41,5 +52,14 @@ public class UsersPageStepDef extends DefaultStepsData {
     @When("I click on the Search button in Filter Users window")
     public void clickOnTheSearchButtonInFilterUsersWindow() {
         usersSteps.clickOnTheSearchButton();
+    }
+
+    @Then("I check that employee with name $name is $condition in the search result")
+    public void checkThatEmployeeNotShown(String name, String condition) {
+        if (condition.contains("NOT")) {
+            softly.assertThat(usersSteps.employeeIsShown(name)).isEqualTo(false);
+        } else {
+            softly.assertThat(usersSteps.employeeIsShown(name)).isEqualTo(true);
+        }
     }
 }

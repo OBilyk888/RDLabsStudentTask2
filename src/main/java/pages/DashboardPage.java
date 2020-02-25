@@ -58,7 +58,7 @@ public class DashboardPage extends BasePage {
     @FindBy(css = "#dashboard__viewNewsOnDashboard > div.document-count-text > div.right")
     private WebElementFacade realCountOfNews;
 
-    public void clickOnHideMenuButton() {
+   public void clickOnHideMenuButton() {
         log.info("Clicking on the [Hide menu] button");
         hideMenuButton.waitUntilVisible().waitUntilClickable().click();
     }

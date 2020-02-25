@@ -17,11 +17,16 @@ Then record is shown with following parameters:
 | Username | User Role(s)                    | Employee Name | Status  | Region |
 | alice    | Default ESS, Default Supervisor | Alice Duval   | Enabled |        |
 
-!-- TODO implement this scenario
 Scenario: AC-2 Filter by Status 'Disabled' and check that Employee with name Cassidy Hope is NOT shown in the search result
+Meta: @testCases
+When I open filter users window
+And Filter user by Status Name Select with option Disabled
+And I click on the Search button in Filter Users window
+Then I check that employee with name Cassidy Hope is NOT shown in the search result
 
-!-- TODO implement this scenario
 Scenario: AC-3 Filter by Admin Role 'Global Admin' and check that Employee with name Cecil Bonaparte is shown in the search result
+Meta:
+
 
 !-- TODO implement this scenario
 Scenario: AC-4 Check that values saved after closing filter users window
