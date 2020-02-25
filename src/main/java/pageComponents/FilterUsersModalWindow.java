@@ -29,8 +29,6 @@ public class FilterUsersModalWindow {
         this.adminRole = modalWindow.find(By.xpath("//div[@id='adminroles_inputfileddiv']//input"));
         this.superVisorRole = modalWindow.find(By.xpath("//div[@id='supervisorroles_inputfileddiv']//input"));
         this.status = modalWindow.find(By.xpath("//div[@id='status_inputfileddiv']//input"));
-
-        //.ng-valid-parse-add [readonly]
         this.location = modalWindow.find(By.xpath("//div[@id='location_inputfileddiv']//input"));
         this.resetButton = modalWindow.find(By.xpath("//a[@ng-click='modal.reset()']"));
         this.cancelButton = modalWindow.find(By.xpath("//a[@ng-click='modal.cancel()']"));

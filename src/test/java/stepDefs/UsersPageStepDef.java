@@ -2,6 +2,7 @@ package stepDefs;
 
 import grids.UsersGrid;
 import net.thucydides.core.annotations.Steps;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
@@ -21,16 +22,27 @@ public class UsersPageStepDef extends DefaultStepsData {
         usersSteps.filterUsersByEmployeeName(employeeName);
     }
 
- /*   @When("Filter user by Status Name")
-    public void filterUsersByStatus() {
-        usersSteps.filterUsersByStatusName();
-    }*/
+    @When("Filter user by Admin Role with option $Global_Admin")
+    public void filterUserByAdminRole() {
+        usersSteps.switchFilter("Admin Role");
+    }
+//    public void filterUsersByAdmin() {
+//        usersSteps.filterUsersByStatusName();
+//        usersSteps.switchFilter("Admin Role");
+//    }
+
+    @Then("Select any value from Admin Role select")
+    public void selectValueFromAdminRole() {
+        usersSteps.switchFilter("Admin Role");
+    }
 
     @When("Filter user by Status Name Select with option Disabled")
+    @Then("Select any value from Status select")
     public void selectDisabledStatus() {
-        usersSteps.filterUsersByStatusName();
-        usersSteps.switchFilter("Disabled");
+        //usersSteps.filterUsersByStatusName();
+        usersSteps.switchFilter("Status");
     }
+
 
     @Then("record is shown with following parameters:$table")
     public void checkResultOfFiltering(ExamplesTable examplesTable) {
@@ -45,6 +57,7 @@ public class UsersPageStepDef extends DefaultStepsData {
     }
 
     @When("I open filter users window")
+    @Alias("Click on the Filter users button again")
     public void openFilterUsersWindow() {
         usersSteps.openFilterWindow();
     }
@@ -62,4 +75,10 @@ public class UsersPageStepDef extends DefaultStepsData {
             softly.assertThat(usersSteps.employeeIsShown(name)).isEqualTo(true);
         }
     }
+//
+//    @Then("Select any value from Status select")
+//    public void selectAnyValueFromStatusSelect(){
+//        usersSteps.filterUsersByStatusName();
+//        //usersSteps.switchFilter();
+//    }
 }

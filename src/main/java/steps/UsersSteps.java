@@ -39,29 +39,31 @@ public class UsersSteps extends DefaultStepsData {
         log.info("Filtering by Employee Name: " + employeeName);
         log.info("Typing employee name into [Employee Name] input field");
         filterUsersModalWindow.getEmployeeNameField().waitUntilEnabled().sendKeys(employeeName);
+
         WebElementFacade employeeDropDown = filterUsersModalWindow.getEmployeeNameField().find(By.xpath("./..//div[contains(@class,'angucomplete-row')]"));
         log.info("Clicking on the autocomplete search result");
         employeeDropDown.waitUntilVisible().waitUntilClickable().click();
         employeeDropDown.waitUntilNotVisible();
     }
 
-    @Step
-    public void filterUsersByStatusName() {
-        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
-        filterUsersModalWindow.getStatus().waitUntilEnabled().click();
-    }
+//    @Step
+//    public void filterUsersByStatusName() {
+//        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
+//        filterUsersModalWindow.getStatus().waitUntilEnabled().click();
+//    }
 
     @Step
     public void switchFilter(String filter) {
         FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
-
         switch (filter) {
-            case "Disabled":
+            case "Status":
+                filterUsersModalWindow.getStatus().waitUntilEnabled().click();
                 filterUsersModalWindow.getStatus().findBy(By.xpath(".//..//ul//span[text()='Disabled']")).waitUntilEnabled().waitUntilClickable().click();
                 break;
 
             case "Admin Role":
-                filterUsersModalWindow.getAdminRole().find(By.xpath("./..//ul//span[text()='Global Admin']")).waitUntilEnabled().waitUntilClickable().click();
+                filterUsersModalWindow.getAdminRole().waitUntilEnabled().click();
+                filterUsersModalWindow.getAdminRole().findBy(By.xpath("./..//ul//span[text()='Global Admin']")).waitUntilEnabled().waitUntilClickable().click();
                 break;
         }
         try {
