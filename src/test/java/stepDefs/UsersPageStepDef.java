@@ -6,11 +6,14 @@ import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import pageComponents.FilterUsersModalWindow;
 import steps.DefaultStepsData;
 import steps.UsersSteps;
 
 import java.util.List;
 import java.util.Map;
+
+import static utils.SessionVariables.FILTER_USERS_WINDOW;
 
 public class UsersPageStepDef extends DefaultStepsData {
 
@@ -26,10 +29,6 @@ public class UsersPageStepDef extends DefaultStepsData {
     public void filterUserByAdminRole() {
         usersSteps.switchFilter("Admin Role");
     }
-//    public void filterUsersByAdmin() {
-//        usersSteps.filterUsersByStatusName();
-//        usersSteps.switchFilter("Admin Role");
-//    }
 
     @Then("Select any value from Admin Role select")
     public void selectValueFromAdminRole() {
@@ -39,10 +38,8 @@ public class UsersPageStepDef extends DefaultStepsData {
     @When("Filter user by Status Name Select with option Disabled")
     @Then("Select any value from Status select")
     public void selectDisabledStatus() {
-        //usersSteps.filterUsersByStatusName();
-        usersSteps.switchFilter("Status");
+         usersSteps.switchFilter("Status");
     }
-
 
     @Then("record is shown with following parameters:$table")
     public void checkResultOfFiltering(ExamplesTable examplesTable) {
@@ -75,10 +72,11 @@ public class UsersPageStepDef extends DefaultStepsData {
             softly.assertThat(usersSteps.employeeIsShown(name)).isEqualTo(true);
         }
     }
-//
-//    @Then("Select any value from Status select")
-//    public void selectAnyValueFromStatusSelect(){
-//        usersSteps.filterUsersByStatusName();
-//        //usersSteps.switchFilter();
-//    }
+
+    @Then("Check that previously entered values saved in Status and Admin Role selects")
+    public void checkThatPrevioiuslyEnteredValueIsSaved(){
+        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
+        softly.assertThat(filterUsersModalWindow.getStatus().getValue()).isEqualTo("Disabled");
+        softly.assertThat(filterUsersModalWindow.getAdminRole().getValue()).isEqualTo("Global Admin");
+    }
 }
