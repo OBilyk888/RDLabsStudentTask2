@@ -14,4 +14,13 @@ public class WorkShiftsStepDefs extends DefaultStepsData {
     public void clickOnAddWorkShiftButton() {
         workShiftsSteps.clickOnAddWorkShiftButton();
     }
+
+    @When("I check that rows with values $General, $Twilight in WorkShift column are shown by default")
+    public void checkThatRowsWithValuesAreShown(String general, String twillight){
+
+        softly.assertThat(workShiftPage.getClickOnGeneralButton().getText().equals(general));
+        softly.assertThat(workShiftPage.getClickOnTwillightButton().getText().equals(twillight));
+
+    }
+
 }

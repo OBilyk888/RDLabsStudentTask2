@@ -32,7 +32,7 @@ And I click on the Search button in Filter Users window
 Then I check that employee with name Cecil Bonaparte is shown in the search result
 
 Scenario: AC-4 Check that values saved after closing filter users window
-Meta: @testCases
+Meta:
 When I open filter users window
 Then Select any value from Status select
 And Select any value from Admin Role select

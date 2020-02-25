@@ -9,7 +9,7 @@ import pageComponents.TimePicker;
 
 import java.util.List;
 
-@Getter
+//@Getter
 @Slf4j
 public class WorkShiftsSteps extends DefaultStepsData {
 
@@ -23,6 +23,23 @@ public class WorkShiftsSteps extends DefaultStepsData {
     public void clickOnAddWorkShiftButton() {
         log.info("Clicking on the [Add work shift] button");
         workShiftPage.getAddWorkShiftButton().waitUntilClickable().click();
+    }
+
+    @Step
+    public void clickOnWorkShiftButton(){
+        log.info("Clicking on the [Work shift] button");
+        workShiftPage.getClickOnWorkShiftButton().waitUntilClickable().click();
+    }
+
+    @Step
+    public void clickOnGeneralButton() {
+        log.info("Clicking on the [General] button");
+        workShiftPage.getClickOnGeneralButton().waitUntilClickable().click();
+    }
+
+    @Step
+    public void clickOnTwillightButton(){
+        workShiftPage.getClickOnTwillightButton().waitUntilClickable().click();
     }
 
     @Step
