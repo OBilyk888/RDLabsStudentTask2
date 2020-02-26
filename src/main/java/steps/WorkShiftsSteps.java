@@ -4,12 +4,19 @@ import grids.WorkShiftGrid;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.By;
 import pageComponents.AddWorkShiftModalWindow;
+import pageComponents.FilterUsersModalWindow;
 import pageComponents.TimePicker;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-//@Getter
+import static utils.SessionVariables.FILTER_USERS_WINDOW;
+import static utils.SessionVariables.WORK_SHIFT_MODAL_WINDOW;
+
+@Getter
 @Slf4j
 public class WorkShiftsSteps extends DefaultStepsData {
 
@@ -20,16 +27,41 @@ public class WorkShiftsSteps extends DefaultStepsData {
     }
 
     @Step
+    public List<String> checkWorkShiftColumn(){
+
+        List<String> valuesOfWorkShiftColumn = new ArrayList<>();
+        List<WorkShiftGrid> allItems = getWorkShiftGrid();
+
+        for (WorkShiftGrid oneItem : allItems) {
+            if (oneItem.getWorkShift().equals("General") || oneItem.getWorkShift().equals("Twilight")) {
+                valuesOfWorkShiftColumn.add(oneItem.getWorkShift());
+            }
+        }
+
+        return valuesOfWorkShiftColumn;
+    }
+
+    @Step
     public void clickOnAddWorkShiftButton() {
         log.info("Clicking on the [Add work shift] button");
         workShiftPage.getAddWorkShiftButton().waitUntilClickable().click();
+        WORK_SHIFT_MODAL_WINDOW.put(new AddWorkShiftModalWindow(workShiftPage.getAddWorkShiftWindow()));
+
     }
 
     @Step
     public void clickOnSaveButton(){
         log.info("Clicking on the [Save] button");
-        workShiftPage.getAddWorkShiftButton().waitUntilClickable().click();
+        workShiftPage.getSaveButton().waitUntilClickable().click();
     }
+
+    @Step
+    public String msgUnderWorkShift(){
+        AddWorkShiftModalWindow addWorkShiftModalWindow = WORK_SHIFT_MODAL_WINDOW.get();
+        return addWorkShiftModalWindow.getAddWorkShiftModal().findBy(By.xpath("//span[contains(text(),'Required')]")).getText();
+    }
+
+
 
     @Step
     public void clickOnWorkShiftButton(){
