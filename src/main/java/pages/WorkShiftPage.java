@@ -10,6 +10,9 @@ public class WorkShiftPage extends BasePage {
     @FindBy(xpath = "//div[@data-tooltip='Add Work Shift']//a")
     private WebElementFacade addWorkShiftButton;
 
+    @FindBy(xpath = "//div[@data-tooltip='Add Work Shift']//a")
+    private WebElementFacade saveButton;
+
     @FindBy(xpath = "//div[@class='list-container']//span[contains(text(),'General')]")
     private WebElementFacade clickOnGeneralButton;
 

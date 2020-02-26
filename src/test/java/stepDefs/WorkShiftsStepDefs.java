@@ -15,6 +15,11 @@ public class WorkShiftsStepDefs extends DefaultStepsData {
         workShiftsSteps.clickOnAddWorkShiftButton();
     }
 
+    @When("I Click on Save button in Add Work Shift window")
+    public void clickOnSaveButton() {
+        workShiftsSteps.clickOnSaveButton();
+    }
+
     @When("I check that rows with values $General, $Twilight in WorkShift column are shown by default")
     public void checkThatRowsWithValuesAreShown(String general, String twillight){
 

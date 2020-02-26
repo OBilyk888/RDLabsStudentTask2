@@ -26,6 +26,12 @@ public class WorkShiftsSteps extends DefaultStepsData {
     }
 
     @Step
+    public void clickOnSaveButton(){
+        log.info("Clicking on the [Save] button");
+        workShiftPage.getAddWorkShiftButton().waitUntilClickable().click();
+    }
+
+    @Step
     public void clickOnWorkShiftButton(){
         log.info("Clicking on the [Work shift] button");
         workShiftPage.getClickOnWorkShiftButton().waitUntilClickable().click();
