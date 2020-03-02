@@ -22,7 +22,7 @@ public class WorkShiftsStepDefs extends DefaultStepsData {
     }
 
     @When("I check that rows with values $General, $Twilight in WorkShift column are shown by default")
-    public void checkThatRowsWithValuesAreShown(String general, String twilight){
+    public void checkThatRowsWithValuesAreShown(String general, String twilight) {
 
 //        softly.assertThat(workShiftPage.getClickOnGeneralButton().getText().equals(general));
 //        softly.assertThat(workShiftPage.getClickOnTwillightButton().getText().equals(twillight));
@@ -31,17 +31,13 @@ public class WorkShiftsStepDefs extends DefaultStepsData {
     }
 
     @Then("Check that $Required error message is shown under Work Shift field")
-    public void checkRequiredErrMsgIsShown(String requiredMsg){
-
+    public void checkRequiredErrMsgIsShown(String requiredMsg) {
         softly.assertThat(workShiftsSteps.msgUnderWorkShift()).isEqualTo(requiredMsg);
-
     }
 
-    @Then("I using time picker set $hours : @minutes value into $filed filed")
-    public void setHoursAndMinutes(String hours, String minutes, String field){
-        workShiftsSteps.setTime(hours,minutes,field);
+    @Then("I using time picker set $hours : $minutes value into $field filed")
+    public void setHoursAndMinutes(String hours, String minutes, String field) {
+        workShiftsSteps.setTime(hours, minutes, field);
     }
-
-
 
 }

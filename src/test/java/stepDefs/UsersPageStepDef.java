@@ -35,10 +35,9 @@ public class UsersPageStepDef extends DefaultStepsData {
         usersSteps.switchFilter("Admin Role");
     }
 
-    @When("Filter user by Status Name Select with option Disabled")
-    @Then("Select any value from Status select")
-    public void selectDisabledStatus() {
-         usersSteps.switchFilter("Status");
+    @When("filter users by $select : $value")
+    public void selectDisabledStatus(String select, String value) {
+         usersSteps.filterUsersBy(select,value);
     }
 
     @Then("record is shown with following parameters:$table")
@@ -73,10 +72,14 @@ public class UsersPageStepDef extends DefaultStepsData {
         }
     }
 
-    @Then("Check that previously entered values saved in Status and Admin Role selects")
-    public void checkThatPrevioiuslyEnteredValueIsSaved(){
-        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
-        softly.assertThat(filterUsersModalWindow.getStatus().getValue()).isEqualTo("Disabled");
-        softly.assertThat(filterUsersModalWindow.getAdminRole().getValue()).isEqualTo("Global Admin");
+    @Then("filter by Admin Role value is $adminRole")
+    public void checkThatAdminRoleSaved(String adminRole) {
+        softly.assertThat(usersSteps.getAdminRole()).as("Wrong Admin Role value").isEqualTo(adminRole);
     }
+
+    @Then("filter by Status value is $status")
+    public void checkThatStatusSaved(String status) {
+        softly.assertThat(usersSteps.getStatus()).as("Wrong Status value").isEqualTo(status);
+    }
+
 }

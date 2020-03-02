@@ -53,41 +53,66 @@ public class DashboardPageSteps extends DefaultStepsData {
     }
 
     @Step
-    public String getTextFromTheHeaderNews() {
-        return dashboardPage.getNewsHeader().waitUntilVisible().getText();
-    }
+    public String getTextFromTheHeaderNews(String nameHeader) {
 
-    @Step
-    public int getCountOfNews() {
-        int temp = 0;
-        List<WebElementFacade> listOfNews = dashboardPage.getListOfNews();
-        for (int i = 0; i < listOfNews.size(); i++) {
-            WebElementFacade webElementFacade = listOfNews.get(i);   // element = 0;  dashboardPage.getListOfNews = 16;  element = 0   temo = 56;
-            temp++;
+        ItemsContainer itemsContainer = ItemsContainer.getItemsContainerName(nameHeader);
+        switch (itemsContainer) {
+            case NEWS:
+                return dashboardPage.getHeaderOfSectionNews().getText();
+            case DOCUMENTS:
+                return dashboardPage.getHeaderOfSectionDocuments().getText();
+            default:
+                throw new IllegalStateException("Unexpected value: " + itemsContainer);
         }
-        return temp;
+       // return dashboardPage.getNewsHeader().waitUntilVisible().getText();
     }
 
     @Step
-    public int getCountOfDocuments() {
-        int temp = 0;
-        List<WebElementFacade> listOfDocuments = dashboardPage.getListOfDocuments();
-        for (int i = 0; i < listOfDocuments.size(); i++) {
-            WebElementFacade webElementFacade = listOfDocuments.get(i);   // element = 0;  dashboardPage.getListOfNews = 16;  element = 0   temo = 56;
-            temp++;
+    public int getCountOfNews(String listOf) {
+        return dashboardPage.getRealCountOf(listOf);
+    }
+
+    @Step
+    public String getTextFromHeader(String sectionName) {
+        ItemsContainer itemsContainer = ItemsContainer.getItemsContainerName(sectionName);
+        switch (itemsContainer) {
+            case NEWS:
+                return dashboardPage.getHeaderOfSectionNews().getText();
+            case DOCUMENTS:
+                return dashboardPage.getHeaderOfSectionDocuments().getText();
+            default:
+                throw new IllegalStateException("Unexpected value: " + itemsContainer);
         }
-        return temp;
     }
 
     @Step
-    public int getRealCount() {
-        String value = dashboardPage.getStringFromSectionNews().split("/")[1].trim();
-        return Integer.parseInt(value);
+    public int getCountItemsList(String sectionName) {
+       //return dashboardPage.getRealCountOf(listOf);
+
+        ItemsContainer itemsContainer = ItemsContainer.getItemsContainerName(sectionName);
+        switch (itemsContainer) {
+            case NEWS:
+                return Integer.parseInt(dashboardPage.getShowingNumberNews().waitUntilVisible().getText().split("/")[1].trim());
+            case DOCUMENTS:
+                return Integer.parseInt(dashboardPage.getShowingNumberOfDocuments().waitUntilVisible().getText().split("/")[1].trim());
+            default:
+                throw new IllegalStateException("Unexpected value: " + itemsContainer);
+        }
+
     }
 
     @Step
-    public String getTextFromTheHeaderDocuments() {
-        return dashboardPage.getDocumentsHeader().waitUntilVisible().getText();
+    public int getValueUnderSection(String section) {
+        String countText;
+        switch (section) {
+            case "News":
+                countText = dashboardPage.getShowingNumberNews().getText().split("/")[1].trim();
+                return Integer.parseInt(countText);
+            case "Documents":
+                countText = dashboardPage.getShowingNumberOfDocuments().getText().split("/")[1].trim();
+                return Integer.parseInt(countText);
+        }
+        return -1;
     }
 
 }

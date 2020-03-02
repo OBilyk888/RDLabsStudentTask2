@@ -17,7 +17,7 @@ public class UsersPage extends BasePage {
     public void clickOnFilterButton() {
         log.info("Clicking on the [Filter button]");
         filterButton.withTimeoutOf(Duration.ofSeconds(15)).waitUntilVisible();
-        waitUntilSpinnerGone(3);
+        waitUntilSpinnerGone(20);
         filterButton.withTimeoutOf(Duration.ofSeconds(15)).waitUntilVisible().waitUntilEnabled().waitUntilClickable().click();
     }
 }

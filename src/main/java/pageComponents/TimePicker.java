@@ -45,4 +45,9 @@ public class TimePicker {
     public int hashCode() {
         return Objects.hash(getTimePickerComponent(), getTopHours(), getTopMinutes(), getHoursBoard(), getMinutesBoard(), getOkButton());
     }
+
+    public void clickToOkButton() {
+        log.info("Click on the OK Button");
+        this.okButton.waitUntilEnabled().waitUntilClickable().click();
+    }
 }

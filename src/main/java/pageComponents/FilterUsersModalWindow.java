@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
 @Getter
 @Slf4j
 public class FilterUsersModalWindow {
@@ -33,6 +35,27 @@ public class FilterUsersModalWindow {
         this.resetButton = modalWindow.find(By.xpath("//a[@ng-click='modal.reset()']"));
         this.cancelButton = modalWindow.find(By.xpath("//a[@ng-click='modal.cancel()']"));
         this.searchButton = modalWindow.find(By.xpath("//a[@ng-click='modal.search()']"));
+    }
+
+    public void changeEmployeeNameTo(String employeeName) {
+        log.info("Change Employee Name to " + employeeName);
+        this.employeeNameField.waitUntilEnabled().sendKeys(employeeName);
+        this.employeeNameField.find(By.xpath("./..//div[contains(@class,'angucomplete-searching')]")).withTimeoutOf(Duration.ofSeconds(15)).waitUntilNotVisible();
+        WebElementFacade employeeDropDown = this.employeeNameField.find(By.xpath("./..//div[contains(@class,'angucomplete-row')]"));
+        employeeDropDown.waitUntilVisible().waitUntilClickable().click();
+        employeeDropDown.waitUntilNotVisible();
+    }
+
+    public void changeStatusTo(String status) {
+        log.info("Change Status to " + status);
+        this.status.waitUntilClickable().click();
+        this.status.find(By.xpath("./..//ul//span[text()='" + status + "']")).waitUntilEnabled().waitUntilClickable().click();
+    }
+
+    public void changeAdminRoleTo(String adminRole) {
+        log.info("Change Admin Role to " + adminRole);
+        this.adminRole.waitUntilClickable().click();
+        this.adminRole.find(By.xpath("./..//ul//span[text()='" + adminRole + "']")).waitUntilEnabled().waitUntilClickable().click();
     }
 
     public void clickOnStatusList() {

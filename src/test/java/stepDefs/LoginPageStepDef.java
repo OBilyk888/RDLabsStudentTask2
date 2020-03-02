@@ -39,9 +39,10 @@ public class LoginPageStepDef extends DefaultStepsData {
                 .contains(errorTextMessage);
     }
 
-    @Then("I check that pop up with text $Invalid_Credentials appears")
-    public void checkThatPopUPInvalidCredentialsAppears(String textPopUp) {
-        softly.assertThat(loginPageSteps.getTextFromPopUPInvalidCredentials()).isEqualTo(textPopUp);
+    @Then("pop up message with text '$text' is shown")
+    public void checkPopUpMessageWithText(String text) {
+        softly.assertThat(loginPageSteps.getTextFromPopUp()).as("Wrong text in Invalid Credentials pop up")
+                .isEqualTo(text);
     }
 
     @When("I click on Login as a Different Role button")
@@ -71,7 +72,7 @@ public class LoginPageStepDef extends DefaultStepsData {
         }
     }
 
-    @Then("Check that text '$admin' admin is shown in Username field")
+    @Then("I check that text '$admin' is shown by default on login page in user name field")
     public void checkThatTextAdminIsDefault(String admin) {
         softly.assertThat(loginPageSteps.getTexFromAdminField()).isEqualTo(admin);
     }

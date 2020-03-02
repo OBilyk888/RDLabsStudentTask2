@@ -8,8 +8,6 @@ import steps.CommonSteps;
 import steps.DashboardPageSteps;
 import steps.DefaultStepsData;
 
-import javax.print.DocFlavor;
-
 public class DashboardPageStepDef extends DefaultStepsData {
 
     @Steps
@@ -35,7 +33,6 @@ public class DashboardPageStepDef extends DefaultStepsData {
         dashboardPageSteps.clickOnHideMenuButton();
     }
 
-
     @Then("main menu $condition")
     public void mainMenuCondition(String condition) {
         String warningMessage = "Menu not " + condition + " after clicking on the hide/show menu button";
@@ -54,27 +51,25 @@ public class DashboardPageStepDef extends DefaultStepsData {
         softly.assertThat(dashboardPageSteps.checkThatLegendAppearsIn(sectionName)).as("Legend component not appears").isTrue();
     }
 
-    @Then("I check that $News section is present on Dashboard page with header News")
-    public void checkThatNewsSectionIsPresent(String value){
-        softly.assertThat(dashboardPageSteps.getTextFromTheHeaderNews()).isEqualTo(value);
-    }
-    @Then("I check that news counter (Showing: number / number) under \"News\" section is same as real amount of news in list")
-    public void checkThatCounterEqualsToRealAmount(){
-        System.out.println("CountOfNews = " + dashboardPageSteps.getCountOfNews());
-        System.out.println("RealCount = " + dashboardPageSteps.getRealCount());
-        softly.assertThat(dashboardPageSteps.getCountOfNews()).isEqualTo(dashboardPageSteps.getRealCount());
+    @Then("I check that $text section is present on Dashboard page with header $text")
+    public void checkThatNewsSectionIsPresent(String sectionName, String value) {
+        softly.assertThat(dashboardPageSteps.getTextFromHeader(sectionName)).
+                as("News").isEqualTo(value);
     }
 
-    @Then("I check that $Documents section is present on Dashboard page with header Documents")
-    public void checkThatDocumentsSectionIsPresent(String value){
-        softly.assertThat((dashboardPageSteps.getTextFromTheHeaderDocuments())).isEqualTo(value);
+    @Then("I check that news counter (Showing: number / number) under $text section is same as real amount of News in list")
+    public void checkThatCounterEqualsToRealAmount(String newsOrDocuments) {
+        softly.assertThat(dashboardPageSteps.getCountItemsList(newsOrDocuments)).
+                as("Documents").isEqualTo(dashboardPageSteps.getValueUnderSection(newsOrDocuments));
     }
 
-    @Then("I check that news counter (Showing: number / number) under Documents section is same as real amount of news in list")
-    public void checkThatDocumentsCounterEqualsToRealAmount(){
-        System.out.println("CounterOfDocuments = " + dashboardPageSteps.getCountOfNews());
-        System.out.println("RealCount = " + dashboardPageSteps.getRealCount());
-        softly.assertThat(dashboardPageSteps.getCountOfNews()).isEqualTo(dashboardPageSteps.getRealCount());
-    }
+//    @Then("I check that $Documents section is present on Dashboard page with header Documents")
+//    public void checkThatDocumentsSectionIsPresent(String value) {
+//        softly.assertThat((dashboardPageSteps.getTextFromHeader("Documents"))).isEqualTo(value);
+//    }
 
+//    @Then("I check that news counter (Showing: number / number) under Documents section is same as real amount of news in list")
+//    public void checkThatDocumentsCounterEqualsToRealAmount() {
+//        softly.assertThat(dashboardPageSteps.getCountItemsList("Documents")).isEqualTo(dashboardPageSteps.getValueUnderSection("Documents"));
+//    }
 }

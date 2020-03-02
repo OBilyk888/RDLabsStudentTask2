@@ -27,6 +27,41 @@ public class UsersSteps extends DefaultStepsData {
     }
 
     @Step
+    public void filterUsersBy(String select, String value) {
+        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
+        switch (select) {
+            case "Employee Name":
+                log.info("Filtering by Employee Name: " + value);
+                filterUsersModalWindow.changeEmployeeNameTo(value);
+                break;
+            case "Status":
+                log.info("Filtering by Status: " + value);
+                filterUsersModalWindow.changeStatusTo(value);
+                break;
+            case "Admin Role":
+                log.info("Filtering by Admin Role: " + value);
+                filterUsersModalWindow.changeAdminRoleTo(value);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value");
+        }
+    }
+
+    @Step
+    public String getStatus() {
+        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
+        log.info("Getting Status");
+        return filterUsersModalWindow.getStatus().getValue();
+    }
+
+    @Step
+    public String getAdminRole() {
+        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
+        log.info("Getting Admin Role");
+        return filterUsersModalWindow.getAdminRole().getValue();
+    }
+
+    @Step
     public void clickOnTheSearchButton() {
         log.info("Clicking on the Search button");
         FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
@@ -45,12 +80,6 @@ public class UsersSteps extends DefaultStepsData {
         employeeDropDown.waitUntilVisible().waitUntilClickable().click();
         employeeDropDown.waitUntilNotVisible();
     }
-
-//    @Step
-//    public void filterUsersByStatusName() {
-//        FilterUsersModalWindow filterUsersModalWindow = FILTER_USERS_WINDOW.get();
-//        filterUsersModalWindow.getStatus().waitUntilEnabled().click();
-//    }
 
     @Step
     public void switchFilter(String filter) {

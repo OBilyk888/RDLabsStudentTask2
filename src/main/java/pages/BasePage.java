@@ -45,6 +45,10 @@ public abstract class BasePage extends PageObject {
         return find(By.xpath("//label[text()='" + checkBoxName + "']/../input"));
     }
 
+    public void waitUntilSpinnerGone() {
+        waitUntilSpinnerGone(20);
+    }
+
     public void waitUntilSpinnerGone(int seconds) {
         log.info("Waiting until spinner gone for: " + seconds + " seconds");
         spinner.withTimeoutOf(Duration.ofSeconds(seconds)).waitUntilNotVisible();
@@ -53,7 +57,7 @@ public abstract class BasePage extends PageObject {
     public void refreshPage() {
         log.info("Refreshing page...");
         getDriver().navigate().refresh();
-        waitUntilSpinnerGone(5);
+        waitUntilSpinnerGone(20);
     }
 
     public void moveToElement(WebElement element, WebDriver driver) {

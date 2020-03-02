@@ -50,4 +50,14 @@ public class PersonalDetailsSteps extends DefaultStepsData {
     public boolean getMaleButtonBooleanAttribute() {
         return Boolean.parseBoolean(personalDetailsPage.getMaleRadioButton().find(By.xpath("./../input")).waitUntilEnabled().getAttribute("checked"));
     }
+
+    @Step
+    public void checkGenderButton(String gender) {
+        personalDetailsPage.clickOnGenderRadioButton(gender);
+    }
+
+    @Step
+    public boolean checkSelectedGenderRadioButton(String gender) {
+        return personalDetailsPage.checkSelectedGenderRadioButton(gender);
+    }
 }

@@ -10,14 +10,18 @@ import steps.PersonalDetailsSteps;
 
 import java.util.List;
 
-import static utils.DateUtils.DATEPATTERN_MY;
-import static utils.DateUtils.getDateInFutureOrPastFromNow;
+import static utils.DateUtils.*;
 import static utils.SessionVariables.DATE_OF_BIRTH;
 
 public class PersonalDatailsStepDef extends DefaultStepsData {
 
     @Steps
     PersonalDetailsSteps personalDetailsSteps;
+
+    @When("I click on $text radio button")
+    public void checkGenderButton(String gender) {
+        personalDetailsSteps.checkGenderButton(gender);
+    }
 
     @Then("I save current Date of Birth to session")
     public void saveCurentDateOfBirthToSession() {
@@ -27,7 +31,7 @@ public class PersonalDatailsStepDef extends DefaultStepsData {
     @When("I change Date of Birth added 1 day to old date")
     public void changeDateOfBirth() {
         String currentDate = personalDetailsSteps.getValueFromDateOfBirthField();
-        String updatedDate = getDateInFutureOrPastFromNow(DATEPATTERN_MY, 1, currentDate);
+        String updatedDate = getDateInFutureOrPastFromNow(DATEPATTERN, 1, currentDate);
         personalDetailsSteps.enterDateIntoDateBirthField(updatedDate);
     }
 
@@ -49,36 +53,25 @@ public class PersonalDatailsStepDef extends DefaultStepsData {
         softly.assertThat(isSorted).as("Wrong ordering inside select box").isTrue();
     }
 
-    @When("I under Gender label I set Male radio button as checked")
-    public void setMaleRadioButton() {
-        personalDetailsPage.getMaleRadioButton().waitUntilClickable().click();
+    @When("I under Gender label I set $text radio button as checked")
+    public void setMaleRadioButton(String gender) {
+        personalDetailsPage.clickOnGenderRadioButton(gender);
     }
 
-    @Then("I check that Female radio button is unchecked")
-    public void checkThatFemaleIsUnchecked() {
-        softly.assertThat(personalDetailsSteps.getFemaleButtonBooleanAttribute()).isEqualTo(false);
+    @Then("$radioButtonName radio button is $condition")
+    public void checkThatRadioButtonUnchecked(String radioButtonName, String condition) {
+        if (condition.contains("not")) {
+            softly.assertThat(personalDetailsSteps.checkSelectedGenderRadioButton(radioButtonName))
+                    .as("After checking whether the radio button is not selected").isFalse();
+        } else {
+            softly.assertThat(personalDetailsSteps.checkSelectedGenderRadioButton(radioButtonName))
+                    .as("After checking whether the radio button is selected").isTrue();
+        }
     }
-
-    @When("I set Female radio button as checked")
-    public void setFemaleRadioButton() {
-        personalDetailsPage.getFemaleRadioButton().waitUntilClickable().click();
-    }
-
-    @Then("I check that Male radio button is unchecked")
-    public void checkThatMaleIsUnchecked() {
-        softly.assertThat(personalDetailsSteps.getMaleButtonBooleanAttribute()).isEqualTo(false);
-    }
-
-//    @Then("When I Set Date of Birth as tomorrow data")
-//    public void setDateOfBirthAsTomorrowDate(){
-//        personalDetailsPage.getDateOfBirthInputField().waitUntilClickable().click();
-//    }
 
     @When("I set Data of Birth as tomorrow data")
     public void setDataOfBirthAsTommorowDate() {
-        String currentDate = personalDetailsSteps.getValueFromDateOfBirthField();
-
-        String updatedDate = getDateInFutureOrPastFromNow(DATEPATTERN_MY, 1);
+        String updatedDate = getDateInFutureOrPastFromNow(DATEPATTERN, 1);
         personalDetailsSteps.enterDateIntoDateBirthField(updatedDate);
     }
 
@@ -104,7 +97,7 @@ public class PersonalDatailsStepDef extends DefaultStepsData {
     }
 
     @Then("I check that error message with text $Required appears under EEO Race and Ethnicity field")
-    public void checkThatRequiredAppearsUuderEEORace(String text) {
+    public void checkThatRequiredAppearsUnderEEORace(String text) {
         softly.assertThat(personalDetailsSteps.getMessageFromEEORaceAndEthnicity()).isEqualTo((text));
     }
 

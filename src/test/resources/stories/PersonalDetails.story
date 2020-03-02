@@ -26,9 +26,9 @@ Then I check that all countries in Nationality select box ordered by name asc
 Scenario: AC-4 user not allow to check both Male and Female radio button in Gender section
 Meta: @regression
 When I under Gender label I set Male radio button as checked
-Then I check that Female radio button is unchecked
-When I set Female radio button as checked
-Then I check that Male radio button is unchecked
+Then Female radio button is not checked
+When I click on Female radio button
+Then Male radio button is not checked
 
 Scenario: AC-5 Check that error message "Should be on or before today" must be shown if user enter birth date in future (next day after today)
 Meta: @regression

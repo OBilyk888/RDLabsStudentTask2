@@ -4,10 +4,14 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
 
 @Getter
 @Slf4j
 public class PersonalDetailsPage extends BasePage {
+
+    public final static String MALE = "Male";
+    public final static String FEMALE = "Female";
 
     @FindBy(css = "#personal_details_tab h4")
     private WebElementFacade personalDetailsHeader;
@@ -33,10 +37,10 @@ public class PersonalDetailsPage extends BasePage {
     @FindBy(xpath = "//span[@class='help-block-message']")
     private WebElementFacade errorMessage;
 
-    @FindBy(xpath = "//*[@id=\"eeo_race_ent_inputfileddiv\"]/div/input")
+    @FindBy(xpath = "//*[@id='eeo_race_ent_inputfileddiv']/div/input")
     private WebElementFacade EEORaceAndEthnicity;
 
-    @FindBy(xpath = "//*[@id=\"eeo_race_ent_inputfileddiv\"]/span")
+    @FindBy(xpath = "//*[@id='eeo_race_ent_inputfileddiv']/span")
     private WebElementFacade EEORaceAndEthnicityMessage;
 
     public void enterDateOfBirth(String date) {
@@ -51,12 +55,30 @@ public class PersonalDetailsPage extends BasePage {
         dateOfBirthInputField.waitUntilEnabled().sendKeys();
     }
 
-    public void clickOnMaleRadioButton() {
-        log.info("set Male radio button checked");
-        maleRadioButton.waitUntilVisible().waitUntilClickable().click();
+    public void clickOnGenderRadioButton(String gender) {
+        log.info("set gender radio button checked");
+        switch (gender) {
+            case MALE:
+                maleRadioButton.waitUntilClickable().click();
+                break;
+            case FEMALE:
+                femaleRadioButton.waitUntilClickable().click();
+                break;
+            default:
+                throw new IllegalStateException("Invalid gender");
+        }
     }
 
-
-
+    public boolean checkSelectedGenderRadioButton(String gender) {
+        log.info("check selected gender radio button");
+        switch (gender) {
+            case MALE:
+                return Boolean.parseBoolean(maleRadioButton.findElement(By.xpath("./../input")).getAttribute("checked"));
+            case FEMALE:
+                return Boolean.parseBoolean(femaleRadioButton.findElement(By.xpath("./../input")).getAttribute("checked"));
+            default:
+                throw new IllegalStateException("Invalid gender");
+        }
+    }
 
 }

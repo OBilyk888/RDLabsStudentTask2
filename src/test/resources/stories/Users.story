@@ -20,7 +20,7 @@ Then record is shown with following parameters:
 Scenario: AC-2 Filter by Status 'Disabled' and check that Employee with name Cassidy Hope is NOT shown in the search result
 Meta: @regression
 When I open filter users window
-And Filter user by Status Name Select with option Disabled
+And filter users by Status : Disabled
 And I click on the Search button in Filter Users window
 Then I check that employee with name Cassidy Hope is NOT shown in the search result
 
@@ -32,10 +32,11 @@ And I click on the Search button in Filter Users window
 Then I check that employee with name Cecil Bonaparte is shown in the search result
 
 Scenario: AC-4 Check that values saved after closing filter users window
-Meta:
+Meta: @regression @testCases
 When I open filter users window
-Then Select any value from Status select
-And Select any value from Admin Role select
+And filter users by Admin Role : Global Salary Admin
+And filter users by Status : Enabled
 When I click on the Search button in Filter Users window
 And Click on the Filter users button again
-Then Check that previously entered values saved in Status and Admin Role selects
+Then filter by Admin Role value is Global Salary Admin
+And filter by Status value is Enabled
