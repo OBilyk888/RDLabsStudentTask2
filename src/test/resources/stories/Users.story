@@ -32,7 +32,7 @@ And I click on the Search button in Filter Users window
 Then I check that employee with name Cecil Bonaparte is shown in the search result
 
 Scenario: AC-4 Check that values saved after closing filter users window
-Meta: @regression @testCases
+Meta: @regression
 When I open filter users window
 And filter users by Admin Role : Global Salary Admin
 And filter users by Status : Enabled

@@ -40,4 +40,8 @@ public class WorkShiftsStepDefs extends DefaultStepsData {
         workShiftsSteps.setTime(hours, minutes, field);
     }
 
+    @Then("I check that $time value calculated in Hours Per Day field")
+    public void checkCalculatedTime(String t) {
+        softly.assertThat(workShiftsSteps.getCalculateHourPerDay().equals(t));
+    }
 }

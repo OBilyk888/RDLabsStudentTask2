@@ -21,14 +21,14 @@ And I Click on Save button in Add Work Shift window
 Then Check that Required error message is shown under Work Shift field
 
 Scenario: AC-3 Check that value in Hours Per Day field calculated propertly
-!-- Meta: @debug
-!-- When I click on Add Work Shift button
-!-- Then I using time picker set 10 : 50 value into From filed
-!-- And I using time picker set 18:20 value into To filed
-!-- And I check that 7.50 value calculated in Hours Per Day field
-!-- Then Using time picker set 8:05 value into From filed
-!-- Then Using time picker set 20:25 value into To filed
-!-- Then Check that 12.33 value calculated in Hours Per Day field
+Meta: @debug @testCases
+When I click on Add Work Shift button
+Then I using time picker set 10 : 50 value into From filed
+And I using time picker set 18 : 20 value into From filed
+Then I check that 7.50 value calculated in Hours Per Day field
+Then I using time picker set 8 : 05 value into From filed
+Then I using time picker set 20 : 25 value into From filed
+Then I check that 12.33 value calculated in Hours Per Day field
 
 
 

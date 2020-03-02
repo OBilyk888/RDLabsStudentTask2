@@ -11,6 +11,7 @@ import pageComponents.TimePicker;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.SessionVariables.ADD_WORK_SHIFT_WINDOW;
 import static utils.SessionVariables.WORK_SHIFT_MODAL_WINDOW;
 
 @Getter
@@ -115,5 +116,14 @@ public class WorkShiftsSteps extends DefaultStepsData {
         getTimePickerElement().clickToOkButton();
 
     }
+
+    @Step
+    public String getCalculateHourPerDay() {
+        AddWorkShiftModalWindow addWorkShiftModalWindow = WORK_SHIFT_MODAL_WINDOW.get();
+        return addWorkShiftModalWindow.getHourPerDay().getValue();
+    }
+
+
+
 
 }
